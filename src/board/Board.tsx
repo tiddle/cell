@@ -22,18 +22,16 @@ export class Board extends Component<IBoardProps, IBoardState> {
 			board: createInitialBoard(this.props.width, this.props.height)
 		};
 
-		console.log(this.state.board);
-
 		this.cellClick = this.cellClick.bind(this);
 	}
 
 	public render() {
 		return (
-			<div className="App">
-				{this.state.board.map((curr, y) => {
+			<div className="board">
+				{this.state.board.map((curr, x) => {
 					return (
-						<div key={y}>
-							{curr.map((c, x) => {
+						<div key={x}>
+							{curr.map((c, y) => {
 								let key = String(x) + String(y);
 								return (
 									<Cell
@@ -54,5 +52,12 @@ export class Board extends Component<IBoardProps, IBoardState> {
 
 	private cellClick(x: number, y: number, active: boolean): void {
 		console.log(x, y, active);
+
+		this.setState(state => {
+			state.board[x][y] = !state.board[x][y];
+			return {
+				board: state.board
+			};
+		});
 	}
 }

@@ -26,7 +26,7 @@ export class Cell extends Component<ICellProps> {
 
 		return (
 			<li className="cell" onClick={this.onClick}>
-				{' '}
+				&nbsp;
 			</li>
 		);
 	}
