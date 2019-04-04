@@ -5,6 +5,9 @@ The aim is to demonstrate how you approach thinking about problems and translati
 Create a repository to your own, spend your allocated time working on a solution and then submit it back to us. Please include a README with installation and usage instructions.
 
 Challenge: Cell Simulator
+
+[Live Example of Carlo's Entry](https://tiddle.github.io/cell/)
+
 The "game" is a zero-player game, meaning that its evolution is determined by its initial state, requiring no further input. One interacts with the Cell Simulator by creating an initial configuration and observing how it evolves.
 
 ![extreme cell simulator](https://user-images.githubusercontent.com/291728/33158075-ec01ddde-d05a-11e7-99b8-35af2fed02e5.gif)
