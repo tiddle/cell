@@ -26,6 +26,7 @@ export class Board extends Component<IBoardProps, IBoardState> {
 
 		this.cellClick = this.cellClick.bind(this);
 		this.nextGenerationClick = this.nextGenerationClick.bind(this);
+		this.resetBoard = this.resetBoard.bind(this);
 	}
 
 	public render() {
@@ -51,14 +52,15 @@ export class Board extends Component<IBoardProps, IBoardState> {
 						);
 					})}
 				</div>
-				<button onClick={this.nextGenerationClick}>&raquo;</button>
+				<button onClick={this.nextGenerationClick}>
+					Next Generation
+				</button>
+				<button onClick={this.resetBoard}>Reset Board</button>
 			</>
 		);
 	}
 
-	private cellClick(x: number, y: number, active: boolean): void {
-		console.log(x, y, active);
-
+	private cellClick(x: number, y: number): void {
 		this.setState(state => {
 			state.board[x][y] = !state.board[x][y];
 			return {
@@ -69,9 +71,14 @@ export class Board extends Component<IBoardProps, IBoardState> {
 
 	private nextGenerationClick(): void {
 		const newBoard = getNextBoardState(this.state.board);
-		console.log(newBoard);
 		this.setState({
 			board: newBoard
+		});
+	}
+
+	private resetBoard(): void {
+		this.setState({
+			board: createInitialBoard(this.props.width, this.props.height)
 		});
 	}
 }

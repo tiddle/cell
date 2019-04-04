@@ -2,8 +2,11 @@
 	display: inline-block;
 	height: 30px;
 	width: 30px;
-	background-color: rgb(151, 150, 150);
-	margin: 3px;
+    color: rgb(3,54,73);
+    cursor: pointer;
+	margin: 5px;
 	text-align: center;
 	line-height: 30px;
+	font-size: 24px;
+	background-color: rgb(205, 179, 128);
 }

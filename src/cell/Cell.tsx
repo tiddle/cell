@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './cell.css';
 
 export interface ICellProps {
-	onClick: (x: number, y: number, active: boolean) => void;
+	onClick: (x: number, y: number) => void;
 	x: number;
 	y: number;
 	active: boolean;
@@ -32,6 +32,6 @@ export class Cell extends Component<ICellProps> {
 	}
 
 	private onClick() {
-		this.props.onClick(this.props.x, this.props.y, this.props.active);
+		this.props.onClick(this.props.x, this.props.y);
 	}
 }
