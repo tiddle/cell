@@ -7,7 +7,7 @@ class App extends Component {
 		super(props);
 	}
 	render() {
-		return <Board width={3} height={10} />;
+		return <Board width={10} height={10} />;
 	}
 }
 

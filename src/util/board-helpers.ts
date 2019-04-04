@@ -1,5 +1,8 @@
 /**
- * For genererating an array for the initial setup of the board
+ * For setting up the initial empty board
+ *
+ * @param x
+ * @param y
  */
 export function createInitialBoard(x: number, y: number): boolean[][] {
 	const output = [];
@@ -16,6 +19,14 @@ export function createInitialBoard(x: number, y: number): boolean[][] {
 	return output;
 }
 
+/**
+ * Retreiving how many active cells are neighbouring a coord
+ * World is round, not flat earth, so each coord always has 8 neightbours
+ *
+ * @param x
+ * @param y
+ * @param boardState
+ */
 export function getSurroundingActive(
 	x: number,
 	y: number,
@@ -43,44 +54,82 @@ export function getSurroundingActive(
 	}
 
 	// top left
-	if (boardState[leftX][topY]) {
+	if (boardState[topY][leftX]) {
 		active++;
-    }
-    
-    // top mid
-	if (boardState[x][topY]) {
-		active++;
-    }
+	}
 
-    // top right
-	if (boardState[rightX][topY]) {
+	// top mid
+	if (boardState[topY][x]) {
 		active++;
-    }
+	}
 
-    // mid left 
-	if (boardState[leftX][y]) {
+	// top right
+	if (boardState[topY][rightX]) {
 		active++;
-    }
+	}
 
-    // mid right
-	if (boardState[rightX][y]) {
+	// mid left
+	if (boardState[y][leftX]) {
 		active++;
-    }
+	}
 
-    // bottom left
-	if (boardState[leftX][bottomY]) {
+	// mid right
+	if (boardState[y][rightX]) {
 		active++;
-    }
+	}
 
-    // bottom mid 
-	if (boardState[x][bottomY]) {
+	// bottom left
+	if (boardState[bottomY][leftX]) {
 		active++;
-    }
+	}
 
-    // bottom right
-	if (boardState[rightX][bottomY]) {
+	// bottom mid
+	if (boardState[bottomY][x]) {
 		active++;
-    }
+	}
+
+	// bottom right
+	if (boardState[bottomY][rightX]) {
+		active++;
+	}
 
 	return active;
+}
+
+/**
+ * Check if this cell will survive the next iteration
+ *
+ * @param x
+ * @param y
+ * @param boardState
+ */
+export function willThisCellSurvive(
+	x: number,
+	y: number,
+	boardState: boolean[][]
+): boolean {
+	const activeNeighbours = getSurroundingActive(x, y, boardState);
+
+	if (activeNeighbours === 2 && boardState[y][x]) {
+		return true;
+	}
+
+	if (activeNeighbours === 3) {
+		return true;
+	}
+
+	return false;
+}
+
+/**
+ * Calculate the next iteration of board state
+ *
+ * @param boardState
+ */
+export function getNextBoardState(boardState: boolean[][]): boolean[][] {
+	return boardState.map((curr, y) => {
+		return curr.map((c, x) => {
+			return willThisCellSurvive(x, y, boardState);
+		});
+	});
 }
